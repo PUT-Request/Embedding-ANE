@@ -1,0 +1,34 @@
+name: Styx Code Review
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+permissions:
+  contents: read
+  write: read
+
+jobs:
+  styx-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install and auth gh CLI
+        run: |
+          sudo apt-get install -y gh
+          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
+      - name: Download styx binary
+        run: |
+          curl -fsSL https://styx-44p.pages.dev/styx-linux-amd64 -o styx
+          chmod +x styx
+
+      - name: Run styx
+        run: ./styx --run styx.yaml
+        env:
+          STYX_API_ENDPOINT: ${{ secrets.STYX_API_ENDPOINT }}
+          STYX_API_KEY: ${{ secrets.STYX_API_KEY }}

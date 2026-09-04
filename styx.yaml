@@ -1,0 +1,22 @@
+# Styx task configuration
+prompt: |
+  Review all Swift files in this repository for common issues:
+  - Force unwraps (!) that could cause runtime crashes — prefer guard/if-let
+  - Missing error handling (try/catch gaps)
+  - Retain cycles or memory leaks (strong reference cycles in closures)
+  - Thread safety issues (shared mutable state without synchronization)
+  - Missing documentation on public types and functions
+  - Unnecessary complexity or duplicated logic
+  - Improper use of CoreML APIs (checking compute unit availability, handling prediction errors)
+
+  For each issue found, create a fix on a new branch.
+  Summarize all changes at the end.
+
+mode: read_write
+
+api_endpoint: ${STYX_API_ENDPOINT}
+api_key: ${STYX_API_KEY}
+model: nemotron-3.5-lightning-free
+max_context: 256000
+
+max_working_time: 30m

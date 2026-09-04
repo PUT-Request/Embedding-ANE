@@ -1,0 +1,33 @@
+# macOS
+.DS_Store
+
+# Swift / Xcode
+.build/
+.swiftpm/
+DerivedData/
+*.xcodeproj
+*.xcworkspace
+xcuserdata/
+Package.resolved
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Models (large binary files)
+Models/**/*.mlmodelc/
+Models/**/*.bin
+Models/**/*.mil
+Models/**/*.model
+Models/**/*.metadata
+Models/**/*.lock
+Models/**/weights/
+Models/**/analytics/
+
+# HuggingFace cache
+.cache/
+
+# Environment / secrets
+.env
+*.env
